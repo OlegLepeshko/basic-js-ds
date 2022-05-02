@@ -13,9 +13,10 @@ class Node {
   data
 
   constructor(data) {
-    this.data = data 
+    this.data = data;
   }
 }
+
 class BinarySearchTree {
 
   rootNode = null;
@@ -23,7 +24,7 @@ class BinarySearchTree {
   getSuccessorNode(node) {
     let successorParent = node;
     let successor = node;
-    let cur = node.rightChild;
+    let cur = node.right;
 
     while (cur !== null) {
       successorParent = successor;
@@ -31,9 +32,9 @@ class BinarySearchTree {
       cur = cur.left;
     }
 
-    if (successor !== node.rightChild) {
-      successorParent.leftChild = successor.rightChild;
-      successor.rightChild = node.rightChild;
+    if (successor !== node.right) {
+      successorParent.left = successor.right;
+      successor.right = node.right;
     }
     return successor;
   }
@@ -55,7 +56,7 @@ class BinarySearchTree {
           if (data < cur.data) {
             cur = cur.left;
             if (cur === null) {
-              insertNode.leftChild = new Node(data);
+              insertNode.left = new Node(data);
               break;
             }
           } else if (data >= cur.data) {
@@ -72,7 +73,7 @@ class BinarySearchTree {
   has(data) {
     let cur = this.rootNode;
 
-    while (curt.data != data) {
+    while (cur.data != data) {
       if (cur.data <= data) {
         cur = cur.right;
       } else {
@@ -129,11 +130,11 @@ class BinarySearchTree {
        if (cur === this.rootNode) {
           this.rootNode = null;
        } else if (isLeftChild) {
-          parent.leftChild = null;
+          parent.left = null;
        } else { 
-          parent.rightChild = null;
+          parent.right = null;
        }
-     } else if (current.right === null) {
+     } else if (cur.right === null) {
        if (cur === this.rootNode) {
           this.rootNode = cur.left
        } else if (isLeftChild) {
@@ -160,7 +161,7 @@ class BinarySearchTree {
          parent.right = successor;
        }
 
-       successor.left = current.left;
+       successor.left = cur.left;
      }
    }
   }
@@ -174,7 +175,7 @@ class BinarySearchTree {
 
     while (cur !== null) {
       if (cur.left !== null) {
-        current = cur.left;
+        cur = cur.left;
       } else {
         return cur.data
       }
